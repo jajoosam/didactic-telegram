@@ -130,6 +130,22 @@ p {
           delete bin[id] 
         }
         update();
+              function insertCss( code ) {
+    var style = document.createElement('style');
+    style.type = 'text/css';
+
+    if (style.styleSheet) {
+        // IE
+        style.styleSheet.cssText = code;
+    } else {
+        // Other browsers
+        style.innerHTML = code;
+    }
+
+    document.getElementsByTagName("body")[0].appendChild( style );
+}
+            insertCss('.chat-widget-container .chat-widget-text p.heading { color: '+bin[id]["color"]+'} .chat-widget-avatar, #user{ border-top:4px solid '+bin[id]["color"]+'; } .chat-box-container .chat-box-nav { background-color: '+bin[id]["color"]+';}')
+document.title = bin[id]["title"];
       }
       function read(){
         $.ajax({
@@ -168,7 +184,7 @@ p {
 fitty('#fit');
 
 $(function() {
-  var chatWidget = (".chat-widget-avatar"),
+  var chatWidget = (".chat-widget-container"),
       chatBox = $(".chat-box-container");
   
   $(chatWidget).click(function(e){
@@ -178,8 +194,35 @@ $(function() {
     $(chatBox).toggleClass("show");
     $(".chat-widget-avatar").toggleClass("open");
   })
+    $(".chat-widget-avatar").click(function(e){
+    
+    window.location = document.getElementById("lio").href;
+    
+    $(chatBox).toggleClass("show");
+    $(".chat-widget-avatar").toggleClass("open");
+  })
   
 });
+
     </script>
+    <div class="chat-widget-wrapper">
+  <div class="chat-widget-container">
+    <a style="text-decoration:none" id="lio" href=""></a>
+    <div style="text-align:left" class="chat-widget-text">
+      <p class="heading">SHARED BY</p>
+      <p id="use"></p>
+    </div>
+    <div class="chat-widget-avatar">
+      <img style="border-width:0.2em;" id="user" src="" alt="" />
+    </div>
+  </div>
+  <div class="chat-box-container">
+    <div class="chat-box-content">
+      <form id="fit" action="" class="chat-box-form">
+
+      </form>
+    </div>
+  </div>
+</div>
   </body>
 </html>

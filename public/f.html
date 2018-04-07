@@ -13,12 +13,11 @@
   <body style="background-color:#3d3d3d">
 <div class="chat-widget-wrapper">
   <div class="chat-widget-container">
-    <a style="text-decoration:none" id="lio" href="">
+    <a style="text-decoration:none" id="lio" href=""></a>
     <div style="text-align:left" class="chat-widget-text">
       <p class="heading">SHARED BY</p>
       <p id="use"></p>
     </div>
-      </a>
     <div class="chat-widget-avatar">
       <img style="border-width:0.2em;" id="user" src="" alt="" />
     </div>
@@ -141,6 +140,22 @@ p {
         document.getElementById("user").src = "https://avatars.io/twitter/" + bin[id]["user"];
         document.getElementById("fit").innerHTML =   '<div style="margin:1em;">'+bin[id]["text"]+'</div>';
         document.getElementById("lio").href= "https://twitter.com/" + bin[id]["user"];
+              function insertCss( code ) {
+    var style = document.createElement('style');
+    style.type = 'text/css';
+
+    if (style.styleSheet) {
+        // IE
+        style.styleSheet.cssText = code;
+    } else {
+        // Other browsers
+        style.innerHTML = code;
+    }
+
+    document.getElementsByTagName("head")[0].appendChild( style );
+}
+      insertCss('.chat-widget-container .chat-widget-text p.heading { color: '+bin[id]["color"]+'} .chat-widget-avatar{ border-top:4px solid '+bin[id]["color"]+'; } .chat-box-container .chat-box-nav { background-color: '+bin[id]["color"]+';}')
+      document.title = bin[id]["title"];
         bin[id]["count"]+=1;
         if(bin[id]["count"] === 100){
           delete bin[id] 
@@ -184,7 +199,7 @@ p {
 fitty('#fit');
 
 $(function() {
-  var chatWidget = (".chat-widget-avatar"),
+  var chatWidget = (".chat-widget-container"),
       chatBox = $(".chat-box-container");
   
   $(chatWidget).click(function(e){
@@ -194,8 +209,16 @@ $(function() {
     $(chatBox).toggleClass("show");
     $(".chat-widget-avatar").toggleClass("open");
   })
+    $(".chat-widget-avatar").click(function(e){
+    
+    window.location = document.getElementById("lio").href;
+    
+    $(chatBox).toggleClass("show");
+    $(".chat-widget-avatar").toggleClass("open");
+  })
   
 });
+
     </script>
   </body>
 </html>
