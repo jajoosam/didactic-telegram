@@ -34,9 +34,7 @@ var autolinker = new Autolinker( {
 
           className : ''
       });
-if(window.location.hash == "#custom"){
-  document.getElementById("lol").style.display = "block";
-}
+
 
 var bin = {};
 var id;
