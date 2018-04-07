@@ -119,6 +119,7 @@ $("#foorm").submit(function(e) {
           bin[id]["user"]= document.getElementById("userr").value;
           bin[id]["type"] = "readify";
           bin[id]["url"] = url;
+          bin[id]["link"] = "https://linkr.fun/r#"+id;
           update("r");
         },
         error: (err) => {
@@ -132,6 +133,7 @@ $("#foorm").submit(function(e) {
 
         bin[id]["code"]= data.embed;
         bin[id]["url"] = url;
+       bin[id]["link"] = "https://linkr.fun/o#"+id;
         update("o");
       }
 
@@ -140,6 +142,7 @@ $("#foorm").submit(function(e) {
           bin[id]["user"]= document.getElementById("userr").value;
         bin[id]["code"]= "<iframe id='frame' style='margin: 0; border: none; width: 100%;' src='"+url+"'></iframe>";
         bin[id]["url"] = url;
+        bin[id]["link"] = "https://linkr.fun/f#"+id;
         update("f");
        }
       else{

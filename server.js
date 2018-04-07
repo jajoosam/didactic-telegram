@@ -32,6 +32,9 @@ app.get("/try", function (request, response) {
   response.sendFile(__dirname + '/views/try.html');
 });
 
+app.get("/u", function (request, response) {
+  response.sendFile(__dirname + '/public/dashboard.html');
+});
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
