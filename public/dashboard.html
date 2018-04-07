@@ -1,0 +1,84 @@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Share the web, get the traffic to come to you!">
+<meta name="theme-color" content="#FF5858" />
+<title>Linkr Dashboard</title>
+<link rel="shortcut icon" href="https://cdn.glitch.com/5e8e6219-e720-4ea8-bc4a-d4f91582a2de%2Flink-symbol_1f517.png?1520675850129">
+<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+<link rel="stylesheet" href="styles.css">
+<body class="container">
+
+  <br>
+  <h1>
+    🔗 Dashboard
+  </h1>
+  <br>
+  <h3 id="heasd" style="color: #4D4D4D">
+    Links you have generated
+  </h3>
+  <br>
+  <ul data-turbolinks="false" id="container">
+    
+  </ul>
+    <button onclick="Cookies.remove('id'); window.location.reload(true)" style="margin:1em;background-color:#3d3d3d; border-color: #3d3d3d;color: white; height: 2.5rem; border-radius: 0.25em; padding: 0 1%; max-width:95%" class="btn topcorner">
+    Logout
+  </button>
+</body>
+<script>
+var dis = [];
+var secret = "$2a$10$xlR0VucMsfSvfKmrqzuCOOQh8.BWZsFrM0lYdYlIPrec12KhtIQJe";
+var polls;
+var user;
+  function read(){
+  
+  $.ajax({
+    url: '//api.jsonbin.io/b/5ac60ff3656b6e0b857c59fe/latest',
+    type: 'GET',
+     headers: { //Required only if you are trying to access a private bin
+       'secret-key': secret
+     },
+    success: (data) => {
+      console.log(data);
+      polls = data;
+      for(var i in polls){
+        if(polls[i]["user"] == user){
+          dis.push(polls[i]);
+          
+          document.getElementById("container").innerHTML+='<div style="color:white;border:white 10px solid; margin:auto; margin-bottom:1em; margin-top:0; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); border-radius:0.25em;" class="col-9 col-sm-12"> <h3 style="margin:0.75em; margin-bottom:0.25em;text-align:center" class="card-header"><a style="text-decoration:none" href="'+polls[i]["link"]+'">'+polls[i]["title"]+'</a></h3> <p style="margin:0; text-align:right; color:#777777">'+ polls[i]["count"] + ' views</p</div>'
+        }
+      }
+
+      if(dis.length===0){
+        document.getElementById("container").innerHTML= "<h1 style='color:#4d4d4d'>Looks like you haven't made a link yet, you can <br><a style='color:#3d3d3d; font-size: 1.5em' href='/try'>create a link here!</a>";
+        var elem = document.querySelector('#heasd');
+        elem.style.display = 'none';
+      }
+
+    },
+    error: (err) => {
+      console.log(err.responseJSON);
+    }
+  });
+}
+if(Cookies.get('id') == undefined){
+    swal("What's your twitter username (without the @)?", {
+      content: "input",
+    })
+    .then((value) => {
+      Cookies.set("id", value, { expires: 7 });
+      user = value;
+      read();
+    })
+}
+else{
+  user = Cookies.get("id");
+  read();
+}
+
+
+  
+
+</script>
