@@ -1,4 +1,18 @@
-      var autolinker = new Autolinker( {
+function insertCss( code ) {
+    var style = document.createElement('style');
+    style.type = 'text/css';
+
+    if (style.styleSheet) {
+        // IE
+        style.styleSheet.cssText = code;
+    } else {
+        // Other browsers
+        style.innerHTML = code;
+    }
+
+    document.getElementsByTagName("head")[0].appendChild( style );
+} 
+var autolinker = new Autolinker( {
           urls : {
               schemeMatches : true,
               wwwMatches    : true,
@@ -91,6 +105,11 @@ $("#foorm").submit(function(e) {
 
       bin[id]["text"] = "<style>.dark a{text-decoration:none; color:#002b36}</style>" + autolinker.link(document.getElementById("text").value);
       bin[id]["count"] = 0;
+      bin[id]["color"] = "#00aeef";
+      bin[id]["title"] = data.title;
+      if(document.getElementById("color").value != ""){
+        bin[id]["color"] = document.getElementById("color").value;
+      }
     if(document.getElementById("article").checked){
       $.ajax({
         url: 'https://mercury.postlight.com/parser?url='+url,
@@ -131,8 +150,14 @@ $("#foorm").submit(function(e) {
 });
 });
 var du = 0;
+
 function preview(){
-  
+  var col = "#00aeef";
+      if(document.getElementById("color").value != ""){
+        col = document.getElementById("color").value;
+      }
+     
+      insertCss('.chat-widget-container .chat-widget-text p.heading { color: '+col+'} .chat-widget-avatar{  border-top:4px solid '+col+'; } .chat-box-container .chat-box-nav { background-color: '+col+';}')
         document.getElementById("use").innerHTML = "@" + document.getElementById("userr").value;
         document.getElementById("user").src = "https://avatars.io/twitter/" + document.getElementById("userr").value;
         document.getElementById("fit").innerHTML =   '<div style="margin:1em;">'+"<style>.dark a{text-decoration:none; color:#002b36}</style>" + autolinker.link(document.getElementById("text").value)+'</div>';

@@ -23,12 +23,12 @@
     <div id="z" style="display:none" class="chat-widget-wrapper">
   
   <div class="chat-widget-container">
-    <a style="text-decoration:none" id="lio" href="">
+    <a style="text-decoration:none" id="lio" href=""></a>
     <div style="text-align:left" class="chat-widget-text">
       <p class="heading">SHARED BY</p>
       <p id="use"></p>
     </div>
-    </a>
+    
     <div class="chat-widget-avatar">
       <img style="border-width:0.2em;" id="user" src="" alt="" />
     </div>
@@ -58,6 +58,7 @@
         <input id="text" type="text" name="text" placeholder="Type in any of your thoughts about this!"/>
         <div id="lol" style="display:none">
         <input id="id" type="text" name="text" placeholder="Your custom url id!"/>
+        <input id="color" type="text" name="text" placeholder="Theme color for your widget"/>
         </div>
         <br>
         <div style="margin-top:0.75em;margin-bottom:0.75em">
@@ -89,12 +90,19 @@
 
 fitty('#fit');
 $(function() {
-  var chatWidget = (".chat-widget-avatar"),
+  var chatWidget = (".chat-widget-container"),
       chatBox = $(".chat-box-container");
   
   $(chatWidget).click(function(e){
     
     e.preventDefault();
+    
+    $(chatBox).toggleClass("show");
+    $(".chat-widget-avatar").toggleClass("open");
+  })
+    $(".chat-widget-avatar").click(function(e){
+    
+    window.location = document.getElementById("lio").href;
     
     $(chatBox).toggleClass("show");
     $(".chat-widget-avatar").toggleClass("open");
