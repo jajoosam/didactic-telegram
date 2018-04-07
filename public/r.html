@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Linkr</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--     <link rel="stylesheet" href="/wing.css"> -->
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/reading.css">
+    <link rel="shortcut icon" href="https://cdn.glitch.com/5e8e6219-e720-4ea8-bc4a-d4f91582a2de%2Flink-symbol_1f517.png?1520675850129">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/reading.js"></script>
+  </head>
+  <body class="dark" style="">
+
+    <style>
+      #fit a{
+        text-decoration:none;
+      }
+      #fit{
+      color: #2d2d2d
+      }
+body {
+  font-family: 'Roboto', sans-serif;
+  text-rendering: optimizeLegibility;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+p {
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.chat-widget-wrapper {
+  display: block;
+  width: 300px;
+  height: 62px;
+  position: fixed;
+  bottom: 20px;
+  right: 0;
+  padding: 10px;
+  cursor: pointer;
+  animation: all 2s linear;
+}
+
+.chat-widget-container {
+  position: relative;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+.chat-widget-container.open {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+.chat-widget-container .chat-widget-text p {
+  margin: 0 auto;
+  color: #808080;
+}
+.chat-widget-container .chat-widget-text p.heading {
+  color: #00aeef;
+  font-weight: 600;
+}
+
+.chat-widget-avatar {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: -11px;
+  right: 30px;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  border-top:4px solid #00aeef;
+}
+
+.chat-box-container {
+  position: absolute;
+  width: 300px;
+  height: 0;
+  background-color: #f1f1f1;
+  bottom: 10px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  overflow: hidden;
+  -webkit-transition: all 0.2s ease 0s;
+  -moz-transition: all 0.2s ease 0s;
+  -ms-transition: all 0.2s ease 0s;
+  -o-transition: all 0.2s ease 0s;
+  transition: all 0.2s ease 0s;
+  z-index: -1;
+}
+.chat-box-container.show {
+  bottom: 72px;
+  height: 300px;
+}
+.chat-box-container .chat-box-nav {
+  background-color: #00aeef;
+  width: 100%;
+  height: 40px;
+}
+
+#user {
+  max-width: 80px;
+  border-radius: 100%;
+  margin-top: -4px;
+  margin-left: -4px;
+  border-top:4px solid #00aeef;
+}
+
+    
+    </style>
+    <div class="ontainer">
+      
+    </div>
+    <script>
+      var id = location.hash.slice(1);
+      var bin = {};
+      function later(){
+        $(".ontainer").html("<div id='frame'>"+bin[id]["code"]+"</div>");
+        document.getElementById("use").innerHTML = "@" + bin[id]["user"];
+        document.getElementById("user").src = "https://avatars.io/twitter/" + bin[id]["user"];
+        document.getElementById("fit").innerHTML =   '<div style="margin:1em;">'+bin[id]["text"]+'</div>';
+                document.getElementById("lio").href= "https://twitter.com/" + bin[id]["user"];
+
+        bin[id]["count"]+=1;
+        if(bin[id]["count"] === 100){
+          delete bin[id] 
+        }
+        update();
+      }
+      function read(){
+        $.ajax({
+        url: 'https://api.jsonbin.io/b/5ac60ff3656b6e0b857c59fe/latest',
+        type: 'GET',
+        success: (data) => {
+          console.log(data);
+          bin = data;
+          console.log("binified!");
+          later();
+        },
+        error: (err) => {
+          console.log(err.responseJSON);
+        }
+      });
+      }
+      read();
+      function update(){
+  $.ajax({
+    url: 'https://api.jsonbin.io/b/5ac60ff3656b6e0b857c59fe',
+    type: 'PUT',
+    contentType: 'application/json',
+    data: JSON.stringify(bin),
+    success: (data) => {
+      console.log("updated!");
+    },
+    error: (err) => {
+      console.log(err.responseJSON);
+    }
+  });
+}
+    </script>
+    <script>
+!function(e,t){if("function"==typeof define&&define.amd)define(["module","exports"],t);else if("undefined"!=typeof exports)t(module,exports);else{var n={exports:{}};t(n,n.exports),e.fitty=n.exports}}(this,function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var i in n)Object.prototype.hasOwnProperty.call(n,i)&&(e[i]=n[i])}return e};t.default=function(e){function t(e,t){var i=n({},F,t),r=e.map(function(e){var t=n({},i,{element:e});return S(t),T(t),{element:e,fit:b(t,o.DIRTY),unsubscribe:w(t)}});return l(),r}function i(e){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};return"string"==typeof e?t(r(document.querySelectorAll(e)),n):t([e],n)[0]}if(e){var r=function(e){return[].slice.call(e)},o={IDLE:0,DIRTY_CONTENT:1,DIRTY_LAYOUT:2,DIRTY:3},u=[],a=null,l="requestAnimationFrame"in e?function(){e.cancelAnimationFrame(a),a=e.requestAnimationFrame(function(){s(u.filter(function(e){return e.dirty}))})}:function(){},c=function(e){return function(){u.forEach(function(t){t.dirty=e}),l()}},s=function(e){e.filter(function(e){return!e.styleComputed}).forEach(function(e){e.styleComputed=p(e)}),e.filter(m).forEach(y),e.filter(d).forEach(f),e.forEach(v),e.forEach(h)},f=function(e){e.availableWidth=e.element.parentNode.clientWidth,e.currentWidth=e.element.scrollWidth,e.previousFontSize=e.currentFontSize,e.currentFontSize=Math.min(Math.max(e.minSize,e.availableWidth/e.currentWidth*e.previousFontSize),e.maxSize),e.whiteSpace=e.multiLine&&e.currentFontSize===e.minSize?"normal":"nowrap"},d=function(e){return e.dirty!==o.DIRTY_LAYOUT||e.dirty===o.DIRTY_LAYOUT&&e.element.parentNode.clientWidth!==e.availableWidth},p=function(t){var n=e.getComputedStyle(t.element,null);t.currentFontSize=parseInt(n.getPropertyValue("font-size"),10),t.display=n.getPropertyValue("display"),t.whiteSpace=n.getPropertyValue("white-space")},m=function(e){var t=!1;return/inline-/.test(e.display)||(t=!0,e.display="inline-block"),"nowrap"!==e.whiteSpace&&(t=!0,e.whiteSpace="nowrap"),t},v=function(e){y(e),e.dirty=o.IDLE},y=function(e){e.originalStyle||(e.originalStyle=e.element.getAttribute("style")||""),e.element.style.cssText=e.originalStyle+";white-space:"+e.whiteSpace+";display:"+e.display+";font-size:"+e.currentFontSize+"px"},h=function(e){e.element.dispatchEvent(new CustomEvent("fit",{detail:{oldValue:e.previousFontSize,newValue:e.currentFontSize,scaleFactor:e.currentFontSize/e.previousFontSize}}))},b=function(e,t){return function(){e.dirty=t,l()}},S=function(e){e.newbie=!0,e.dirty=!0,u.push(e)},w=function(e){return function(){u=u.filter(function(t){return t.element!==e.element}),e.observeMutations&&e.observer.disconnect(),e.element.style.cssText=e.originalStyle}},T=function(e){e.observeMutations&&(e.observer=new MutationObserver(b(e,o.DIRTY_CONTENT)),e.observer.observe(e.element,e.observeMutations))},z={subtree:!0,childList:!0,characterData:!0},F={minSize:16,maxSize:512,multiLine:!0,observeMutations:"MutationObserver"in e&&z},g=null,D=function(){e.clearTimeout(g),g=e.setTimeout(c(o.DIRTY_LAYOUT),i.observeWindowDelay)},E=["resize","orientationchange"];return Object.defineProperty(i,"observeWindow",{set:function(t){var n=(t?"add":"remove")+"EventListener";E.forEach(function(t){e[n](t,D)})}}),i.observeWindow=!0,i.observeWindowDelay=100,i.fitAll=c(o.DIRTY),i}}("undefined"==typeof window?null:window),e.exports=t.default});
+
+fitty('#fit');
+
+$(function() {
+  var chatWidget = (".chat-widget-avatar"),
+      chatBox = $(".chat-box-container");
+  
+  $(chatWidget).click(function(e){
+    
+    e.preventDefault();
+    
+    $(chatBox).toggleClass("show");
+    $(".chat-widget-avatar").toggleClass("open");
+  })
+  
+});
+    </script>
+  </body>
+</html>

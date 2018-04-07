@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Linkr</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Share the web, get the traffic to come to you!">
+    <link rel="stylesheet" href="/wing.css">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="shortcut icon" href="https://cdn.glitch.com/5e8e6219-e720-4ea8-bc4a-d4f91582a2de%2Flink-symbol_1f517.png?1520675850129">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="/autolinker.js"></script>
+    <script src="/script.js" defer></script>
+    <style>
+      input[type=text], input[type=text]:hover, input[type=text]:focus, input[type=text]:active{
+        border:none;
+      }
+    </style>
+  </head>
+  <body style="background-color:#5d5d5d; color:white;">
+    <div id="z" style="display:none" class="chat-widget-wrapper">
+  
+  <div class="chat-widget-container">
+    <a style="text-decoration:none" id="lio" href="">
+    <div style="text-align:left" class="chat-widget-text">
+      <p class="heading">SHARED BY</p>
+      <p id="use"></p>
+    </div>
+    </a>
+    <div class="chat-widget-avatar">
+      <img style="border-width:0.2em;" id="user" src="" alt="" />
+    </div>
+  </div>
+  <div class="chat-box-container">
+    <div class="chat-box-content">
+      <form style="color:#3d3d3d" id="fit" action="" class="chat-box-form">
+
+      </form>
+    </div>
+  </div>
+</div>
+    <div onkeyup="br()" id="container" class="container">
+      <h1>Linkr <span>🔗</span></h1>
+      <p style="text-align:center">
+        Share the web, get the traffic to come to you!
+      </p>
+      <p style="text-align:center">
+        <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){ js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script>
+        <em>Free for up to 💯 views. Want more? <a class="typeform-share link" data-hide-headers=true data-hide-footer=true target="_blank" data-mode="popup" style="color:white; font-weight:600; text-decoration:none" href="https://jajoosam.typeform.com/to/o7wMMK">Go Pro</a></em>
+      </p>
+      <form id="foorm">
+        <input id="link" type="text" name="link" placeholder="The link you want to share"/>
+        <br>
+        <input id="userr" type="text" name="user" placeholder="Your twitter username without the @"/>
+        <br>
+        <input id="text" type="text" name="text" placeholder="Type in any of your thoughts about this!"/>
+        <div id="lol" style="display:none">
+        <input id="id" type="text" name="text" placeholder="Your custom url id!"/>
+        </div>
+        <br>
+        <div style="margin-top:0.75em;margin-bottom:0.75em">
+          
+        
+        <label>Check this if your link is an article 📜</label>
+        <input id="article" name="article" type="checkbox">
+          </div>
+        <button id="submit" style="width:90%; height:45px" type="submit">
+          Generate Link 🔗
+        </button>
+      </form>
+
+
+
+</div>
+
+
+
+</body>
+</html>
+
+    </div>
+    <div id="hid" class="container" style="display:none">
+      
+    </div>
+    <script>
+!function(e,t){if("function"==typeof define&&define.amd)define(["module","exports"],t);else if("undefined"!=typeof exports)t(module,exports);else{var n={exports:{}};t(n,n.exports),e.fitty=n.exports}}(this,function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var i in n)Object.prototype.hasOwnProperty.call(n,i)&&(e[i]=n[i])}return e};t.default=function(e){function t(e,t){var i=n({},F,t),r=e.map(function(e){var t=n({},i,{element:e});return S(t),T(t),{element:e,fit:b(t,o.DIRTY),unsubscribe:w(t)}});return l(),r}function i(e){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};return"string"==typeof e?t(r(document.querySelectorAll(e)),n):t([e],n)[0]}if(e){var r=function(e){return[].slice.call(e)},o={IDLE:0,DIRTY_CONTENT:1,DIRTY_LAYOUT:2,DIRTY:3},u=[],a=null,l="requestAnimationFrame"in e?function(){e.cancelAnimationFrame(a),a=e.requestAnimationFrame(function(){s(u.filter(function(e){return e.dirty}))})}:function(){},c=function(e){return function(){u.forEach(function(t){t.dirty=e}),l()}},s=function(e){e.filter(function(e){return!e.styleComputed}).forEach(function(e){e.styleComputed=p(e)}),e.filter(m).forEach(y),e.filter(d).forEach(f),e.forEach(v),e.forEach(h)},f=function(e){e.availableWidth=e.element.parentNode.clientWidth,e.currentWidth=e.element.scrollWidth,e.previousFontSize=e.currentFontSize,e.currentFontSize=Math.min(Math.max(e.minSize,e.availableWidth/e.currentWidth*e.previousFontSize),e.maxSize),e.whiteSpace=e.multiLine&&e.currentFontSize===e.minSize?"normal":"nowrap"},d=function(e){return e.dirty!==o.DIRTY_LAYOUT||e.dirty===o.DIRTY_LAYOUT&&e.element.parentNode.clientWidth!==e.availableWidth},p=function(t){var n=e.getComputedStyle(t.element,null);t.currentFontSize=parseInt(n.getPropertyValue("font-size"),10),t.display=n.getPropertyValue("display"),t.whiteSpace=n.getPropertyValue("white-space")},m=function(e){var t=!1;return/inline-/.test(e.display)||(t=!0,e.display="inline-block"),"nowrap"!==e.whiteSpace&&(t=!0,e.whiteSpace="nowrap"),t},v=function(e){y(e),e.dirty=o.IDLE},y=function(e){e.originalStyle||(e.originalStyle=e.element.getAttribute("style")||""),e.element.style.cssText=e.originalStyle+";white-space:"+e.whiteSpace+";display:"+e.display+";font-size:"+e.currentFontSize+"px"},h=function(e){e.element.dispatchEvent(new CustomEvent("fit",{detail:{oldValue:e.previousFontSize,newValue:e.currentFontSize,scaleFactor:e.currentFontSize/e.previousFontSize}}))},b=function(e,t){return function(){e.dirty=t,l()}},S=function(e){e.newbie=!0,e.dirty=!0,u.push(e)},w=function(e){return function(){u=u.filter(function(t){return t.element!==e.element}),e.observeMutations&&e.observer.disconnect(),e.element.style.cssText=e.originalStyle}},T=function(e){e.observeMutations&&(e.observer=new MutationObserver(b(e,o.DIRTY_CONTENT)),e.observer.observe(e.element,e.observeMutations))},z={subtree:!0,childList:!0,characterData:!0},F={minSize:16,maxSize:512,multiLine:!0,observeMutations:"MutationObserver"in e&&z},g=null,D=function(){e.clearTimeout(g),g=e.setTimeout(c(o.DIRTY_LAYOUT),i.observeWindowDelay)},E=["resize","orientationchange"];return Object.defineProperty(i,"observeWindow",{set:function(t){var n=(t?"add":"remove")+"EventListener";E.forEach(function(t){e[n](t,D)})}}),i.observeWindow=!0,i.observeWindowDelay=100,i.fitAll=c(o.DIRTY),i}}("undefined"==typeof window?null:window),e.exports=t.default});
+
+fitty('#fit');
+$(function() {
+  var chatWidget = (".chat-widget-avatar"),
+      chatBox = $(".chat-box-container");
+  
+  $(chatWidget).click(function(e){
+    
+    e.preventDefault();
+    
+    $(chatBox).toggleClass("show");
+    $(".chat-widget-avatar").toggleClass("open");
+  })
+  
+});
+    </script>
+  </body>
+</html>
